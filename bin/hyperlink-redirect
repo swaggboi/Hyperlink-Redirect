@@ -1,0 +1,14 @@
+#!/usr/bin/env raku
+
+# It is important that you import App::MyService after
+# Humming-Bird::Core to avoid having some weird side-effects with
+# route declarations in your service
+
+use v6.d;
+use Humming-Bird::Core;
+
+# Local libs
+use lib 'lib';
+use Hyperlink-Redirect;
+
+listen(3000);

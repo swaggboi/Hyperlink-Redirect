@@ -1,0 +1,7 @@
+{
+    "name": "Hyperlink-Redirect",
+    "depends": ["Humming-Bird"],
+    "provides": {
+        "Hyperlink-Redirect": "lib/Hyperlink-Redirect.rakumod"
+    }
+}
