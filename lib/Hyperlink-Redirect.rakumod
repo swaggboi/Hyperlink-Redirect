@@ -6,7 +6,7 @@ use Template6;
 # Normally would 'use' local libs here for Controller and Model and
 # what not but keeping it simple for now...
 
-# Where art thou templates
+# Set things up (config stuff would go here?)
 my $templates = Template6.new;
 $templates.add-path: 'templates';
 
