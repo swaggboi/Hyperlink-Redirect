@@ -1,5 +1,3 @@
-use v6.d;
-
 use Humming-Bird::Core;
 use Template6;
 
