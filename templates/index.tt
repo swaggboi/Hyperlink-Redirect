@@ -1,5 +1,5 @@
-[% SET title = 'Test page' %]
-[% INCLUDE 'header'        %]
+[% INCLUDE 'header'
+   title = 'Test page' %]
 <h1>Ayy...</h1>
 <p>lmao</p>
 [% INCLUDE 'footer' %]
