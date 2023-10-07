@@ -1,5 +1,12 @@
 [% INCLUDE 'header'
-   title = 'Test page' %]
-<h1>Ayy...</h1>
-<p>lmao</p>
+   title = 'Create new hyperlink' %]
+[% IF hyperlink %]
+<p>Your hyperlink is: <a href="[% hyperlink %]">[% hyperlink %]</a></p>
+[% END %]
+<form method="post">
+  <label for="hyperlink">Hyperlink</label>
+  <input id="hyperlink" name="hyperlink" type="text" minlength="4"
+         maxlength="2097152" required>
+  <button type="submit">Process</button>
+</form>
 [% INCLUDE 'footer' %]

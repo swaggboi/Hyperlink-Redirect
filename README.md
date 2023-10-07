@@ -14,4 +14,5 @@ A "useful" tool for turning hyperlinks into redirects in the name of shortening 
 
 ## TODO
 
-1. Fix my `.emacs` to style stuff in a way that is not in fact insane
+1. Process the form input
+1. Make the return url gzip/base64'd

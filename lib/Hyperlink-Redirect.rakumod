@@ -14,3 +14,14 @@ my $router = Router.new(root => '/');
 $router.get(-> $request, $response {
     $response.html($templates.process: 'index');
 });
+
+$router.post(-> $request, $response {
+    $response.html($templates.process: 'index');
+});
+
+# Try a wildcard to catch 'all' path
+$router.get('/**', -> $request, $response {
+    my $url = $request.path.substr(1); # Omits the leading slash
+
+    $response.redirect($url);
+});
