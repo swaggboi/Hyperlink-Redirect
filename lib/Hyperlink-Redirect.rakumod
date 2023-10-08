@@ -1,5 +1,7 @@
 use Humming-Bird::Core;
 use Template6;
+use Base64;
+use Libarchive::Filter :gzip;
 
 # Normally would 'use' local libs here for Controller and Model and
 # what not but keeping it simple for now...
@@ -16,7 +18,11 @@ $router.get(-> $request, $response {
 });
 
 $router.post(-> $request, $response {
-    $response.html($templates.process: 'index');
+    my $hyperlink = $request.content.{'hyperlink'};
+
+    say encode-base64(gzip($hyperlink), :str);
+
+    $response.html($templates.process: 'index', :$hyperlink);
 });
 
 # Try a wildcard to catch 'all' path

@@ -2,7 +2,9 @@
     "name": "Hyperlink-Redirect",
     "depends": [
         "Humming-Bird",
-        "Template6"
+        "Template6",
+        "Base64",
+        "Libarchive::Filter"
     ],
     "provides": {
         "Hyperlink-Redirect": "lib/Hyperlink-Redirect.rakumod"

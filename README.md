@@ -10,7 +10,7 @@ A "useful" tool for turning hyperlinks into redirects in the name of shortening 
 
 ### Run the guy
 
-    raku bin/hyperlink-redirect
+    ./bin/hyperlink-redirect
 
 ## TODO
 
