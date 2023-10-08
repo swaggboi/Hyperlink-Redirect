@@ -1,4 +1,6 @@
 use Humming-Bird::Core;
+use Humming-Bird::Middleware;
+use Humming-Bird::Advice;
 use Template6;
 use Base64;
 use Libarchive::Filter :gzip;
@@ -9,6 +11,10 @@ use Libarchive::Filter :gzip;
 # Set things up (config stuff would go here?)
 my $templates = Template6.new;
 $templates.add-path: 'templates';
+
+# Logging
+middleware &middleware-logger;
+advice     &advice-logger;
 
 # Must set the root path lest yet miss setting $!root
 my $router = Router.new(root => '/');
