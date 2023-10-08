@@ -18,16 +18,19 @@ $router.get(-> $request, $response {
 });
 
 $router.post(-> $request, $response {
-    my $hyperlink = $request.content.{'hyperlink'};
-
-    say encode-base64(gzip($hyperlink), :str);
+    my $return-url = $request.content.{'hyperlink'};
+    my $url-scheme = $request.headers.{'X-Forwarded-Proto'} || 'http';
+    my $url-host   = $request.headers.{'Host'};
+    my $base-url   = $url-scheme ~ '://' ~ $url-host ~ '/';
+    my $hyperlink  = $base-url ~ encode-base64(gzip($return-url), :str);
 
     $response.html($templates.process: 'index', :$hyperlink);
 });
 
 # Try a wildcard to catch 'all' path
 $router.get('/**', -> $request, $response {
-    my $url = $request.path.substr(1); # Omits the leading slash
+    my $return-url   = $request.path.substr(1); # Omits the leading slash
+    my $redirect-url = gunzip(decode-base64($return-url, :bin));
 
-    $response.redirect($url);
+    $response.redirect($redirect-url);
 });

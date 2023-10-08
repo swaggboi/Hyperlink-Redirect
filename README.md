@@ -14,5 +14,4 @@ A "useful" tool for turning hyperlinks into redirects in the name of shortening 
 
 ## TODO
 
-1. Process the form input
-1. Make the return url gzip/base64'd
+1. Why does 'hyperlink' linger even for subsequent GET requests from different clients??
