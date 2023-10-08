@@ -6,7 +6,7 @@ A "useful" tool for turning hyperlinks into redirects in the name of shortening 
 
 ### Install dependencies
 
-    zef install --deps-only .
+    zef -v install --deps-only .
 
 ### Run the guy
 
