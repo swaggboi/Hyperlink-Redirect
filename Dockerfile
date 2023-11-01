@@ -13,7 +13,7 @@ RUN apt-get -y upgrade
 RUN apt-get -y install libssl-dev libarchive-dev
 # Get the latest and greatest for bug fix
 # https://github.com/rawleyfowler/Humming-Bird/issues/60#issuecomment-1788351265
-zef install https://github.com/rawleyfowler/Humming-Bird --force-install
+RUN zef install https://github.com/rawleyfowler/Humming-Bird --force-install
 # Stupid tests failing idk
 RUN zef -v install --force-test IO::Socket::Async::SSL \
     Archive::Libarchive::Raw NativeHelpers::Callback
