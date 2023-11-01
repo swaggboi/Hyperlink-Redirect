@@ -42,7 +42,6 @@ A "useful" tool for turning hyperlinks into redirects in the name of shortening 
 
 ## TODO
 
+1. Validate submitted URLs
 1. Make button to do a [meta element redirect]
    (https://www.w3docs.com/snippets/html/how-to-redirect-a-web-page-in-html.html)
-1. Why does Libarchive choke on strings like
-   `https://youtube.com/watch?v=xvFZjo5PgG0`??
