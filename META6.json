@@ -2,7 +2,7 @@
     "name": "Hyperlink-Redirect",
     "depends": [
         "Humming-Bird",
-        "Template6",
+        "Template::Mustache",
         "Base64",
         "Libarchive::Filter"
     ],
