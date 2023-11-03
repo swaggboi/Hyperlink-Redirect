@@ -1,5 +1,5 @@
 {{> header}}
-{{^meta-refresh}}
+{{^redirect-url}}
   {{#hyperlink}}
     <p>Your hyperlink is: <a href="{{hyperlink}}">{{hyperlink}}</a></p>
   {{/hyperlink}}
@@ -13,5 +13,5 @@
     <input id="meta-refresh" name="meta-refresh" type="checkbox">
     <button type="submit">Process</button>
   </form>
-{{/meta-refresh}}
+{{/redirect-url}}
 {{> footer}}

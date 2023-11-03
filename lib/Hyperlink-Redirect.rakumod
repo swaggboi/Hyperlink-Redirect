@@ -25,10 +25,10 @@ $router.get(-> $request, $response {
 });
 
 $router.post(-> $request, $response {
-    my Str  $return-url   = $request.content.{'hyperlink'};
-    my Bool $meta-refresh = $request.content.<meta-refresh> ?? True !! False;
-    my Str  $url-scheme   = $request.headers.{'X-Forwarded-Proto'} || 'http';
-    my Str  $url-host     = $request.headers.{'Host'};
+    my Str  $return-url   = $request.content.<hyperlink>;
+    my Bool $meta-refresh = $request.content.<meta-refresh>.defined;
+    my Str  $url-scheme   = $request.headers.<X-Forwarded-Proto> || 'http';
+    my Str  $url-host     = $request.headers.<Host>;
     my (Str $base-url, Str $hyperlink, Str %stash);
 
     $base-url = $meta-refresh
@@ -37,21 +37,16 @@ $router.post(-> $request, $response {
 
     $hyperlink = $base-url ~ encode-base64(gzip($return-url), :str);
 
-    %stash =
-        title     => 'New hyperlink created',
-        hyperlink => $hyperlink;
+    %stash = title => 'New hyperlink created', :$hyperlink;
 
     $response.html($template.render: 'index', %stash);
 });
-
 
 # Process the hyperlink
 $router.get('/--meta-refresh/**', -> $request, $response {
     my Str $return-url   = $request.path.subst: /^ '/--meta-refresh/'/, Empty;
     my Str $redirect-url = gunzip(decode-base64($return-url, :bin));
-    my Str %stash        =
-        title        => 'Hyperlinking...',
-        redirect-url => $redirect-url;
+    my Str %stash        = title => 'Hyperlinking...', :$redirect-url;
 
     $response.html($template.render: 'index', %stash);
 });
