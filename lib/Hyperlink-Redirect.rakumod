@@ -31,9 +31,8 @@ $router.post(-> $request, $response {
     my Str  $url-host     = $request.headers.<Host>;
     my (Str $base-url, Str $hyperlink, Str %stash);
 
-    $base-url = $meta-refresh
-        ?? $url-scheme ~ '://' ~ $url-host ~ '/--meta-refresh/'
-        !! $url-scheme ~ '://' ~ $url-host ~ '/';
+    $base-url = $url-scheme ~ '://' ~ $url-host ~
+        ($meta-refresh ?? '/--meta-refresh/' !! '/');
 
     $hyperlink = $base-url ~ encode-base64(gzip($return-url), :str);
 
