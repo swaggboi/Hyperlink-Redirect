@@ -25,10 +25,10 @@ $router.get(-> $request, $response {
 });
 
 $router.post(-> $request, $response {
-    my Str  $return-url   = $request.content.<hyperlink>;
-    my Bool $meta-refresh = $request.content.<meta-refresh>.defined;
-    my Str  $url-scheme   = $request.headers.<X-Forwarded-Proto> || 'http';
-    my Str  $url-host     = $request.headers.<Host>;
+    my Str  $return-url   = $request.content<hyperlink>;
+    my Bool $meta-refresh = $request.content<meta-refresh>.defined;
+    my Str  $url-scheme   = $request.headers<X-Forwarded-Proto> || 'http';
+    my Str  $url-host     = $request.headers<Host>;
     my (Str $base-url, Str $hyperlink, Str %stash);
 
     $base-url = $url-scheme ~ '://' ~ $url-host ~
