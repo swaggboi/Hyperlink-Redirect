@@ -4,13 +4,15 @@
     <p>Your hyperlink is: <a href="{{hyperlink}}">{{hyperlink}}</a></p>
   {{/hyperlink}}
   <form method="post">
-    <label for="hyperlink">Hyperlink</label>
-    <input id="hyperlink" name="hyperlink" type="text" minlength="4"
-           maxlength="2083" required>
-    <label for="meta-refresh">
-      <a href="https://en.wikipedia.org/wiki/Meta_refresh">Meta refresh?</a>
-    </label>
-    <input id="meta-refresh" name="meta-refresh" type="checkbox">
+    <div>
+      <label for="hyperlink">Hyperlink</label>
+      <input id="hyperlink" name="hyperlink" type="text" minlength="4"
+             maxlength="2083" required>
+      <input id="meta-refresh" name="meta-refresh" type="checkbox">
+      <label for="meta-refresh">
+        <a href="https://en.wikipedia.org/wiki/Meta_refresh">Meta refresh?</a>
+      </label>
+    </div>
     <button type="submit">Process</button>
   </form>
 {{/redirect-url}}
