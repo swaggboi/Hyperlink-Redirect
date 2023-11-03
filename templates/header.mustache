@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
   <title>{{title}}</title>
+  {{#meta-refresh}}
+    <meta http-equiv="Refresh" content="0; url='{{redirect-url}}'">
+  {{/meta-refresh}}
 </head>
 <body>
 <h1>{{title}}</h1>

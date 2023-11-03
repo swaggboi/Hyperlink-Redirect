@@ -1,11 +1,17 @@
 {{> header}}
-{{#hyperlink}}
-<p>Your hyperlink is: <a href="{{hyperlink}}">{{hyperlink}}</a></p>
-{{/hyperlink}}
-<form method="post">
-  <label for="hyperlink">Hyperlink</label>
-  <input id="hyperlink" name="hyperlink" type="text" minlength="4"
-         maxlength="2097152" required>
-  <button type="submit">Process</button>
-</form>
+{{^meta-refresh}}
+  {{#hyperlink}}
+    <p>Your hyperlink is: <a href="{{hyperlink}}">{{hyperlink}}</a></p>
+  {{/hyperlink}}
+  <form method="post">
+    <label for="hyperlink">Hyperlink</label>
+    <input id="hyperlink" name="hyperlink" type="text" minlength="4"
+           maxlength="2083" required>
+    <label for="meta-refresh">
+      <a href="https://en.wikipedia.org/wiki/Meta_refresh">Meta refresh?</a>
+    </label>
+    <input id="meta-refresh" name="meta-refresh" type="checkbox">
+    <button type="submit">Process</button>
+  </form>
+{{/meta-refresh}}
 {{> footer}}

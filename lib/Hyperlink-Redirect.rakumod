@@ -25,19 +25,37 @@ $router.get(-> $request, $response {
 });
 
 $router.post(-> $request, $response {
-    my Str $return-url = $request.content.{'hyperlink'};
-    my Str $url-scheme = $request.headers.{'X-Forwarded-Proto'} || 'http';
-    my Str $url-host   = $request.headers.{'Host'};
-    my Str $base-url   = $url-scheme ~ '://' ~ $url-host ~ '/';
-    my Str $hyperlink  = $base-url ~ encode-base64(gzip($return-url), :str);
-    my Str %stash      =
+    my Str  $return-url   = $request.content.{'hyperlink'};
+    my Bool $meta-refresh = $request.content.<meta-refresh> ?? True !! False;
+    my Str  $url-scheme   = $request.headers.{'X-Forwarded-Proto'} || 'http';
+    my Str  $url-host     = $request.headers.{'Host'};
+    my (Str $base-url, Str $hyperlink, Str %stash);
+
+    $base-url = $meta-refresh
+        ?? $url-scheme ~ '://' ~ $url-host ~ '/--meta-refresh/'
+        !! $url-scheme ~ '://' ~ $url-host ~ '/';
+
+    $hyperlink = $base-url ~ encode-base64(gzip($return-url), :str);
+
+    %stash =
         title     => 'New hyperlink created',
         hyperlink => $hyperlink;
 
     $response.html($template.render: 'index', %stash);
 });
 
-# Try a wildcard to catch 'all' path
+
+# Process the hyperlink
+$router.get('/--meta-refresh/**', -> $request, $response {
+    my Str $return-url   = $request.path.subst: /^ '/--meta-refresh/'/, Empty;
+    my Str $redirect-url = gunzip(decode-base64($return-url, :bin));
+    my Str %stash        =
+        title        => 'Hyperlinking...',
+        redirect-url => $redirect-url;
+
+    $response.html($template.render: 'index', %stash);
+});
+
 $router.get('/**', -> $request, $response {
     my Str $return-url   = $request.path.substr(1); # Omits the leading slash
     my Str $redirect-url = gunzip(decode-base64($return-url, :bin));
