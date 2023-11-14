@@ -1,3 +1,6 @@
+use Base64;
+use Libarchive::Filter :gzip;
+
 my $starts-with-protocol = rx:i/ ^https? '://'/;
 
 sub fix-protocol($url) is export {
@@ -17,3 +20,11 @@ sub dbug($message) {
 # ERROR: Stringification of a Buf is not done with 'Stringy'.  The 'decode'
 # method should be used to convert a Buf to a Str.
 #  TYPE: X::Buf::AsStr
+
+sub hyperlink(Str $return-url --> Str) is export {
+    encode-base64(gzip($return-url), :str)
+}
+
+sub redirect(Str $return-url --> Str) is export {
+    gunzip(decode-base64($return-url, :bin));
+}

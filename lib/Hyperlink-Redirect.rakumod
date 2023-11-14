@@ -2,8 +2,6 @@ use Humming-Bird::Core;
 use Humming-Bird::Middleware;
 use Humming-Bird::Advice;
 use Template::Mustache;
-use Base64;
-use Libarchive::Filter :gzip;
 
 # Normally would 'use' local libs here for Controller and Model and
 # what not but keeping it simple for now...
@@ -36,7 +34,7 @@ $router.post(-> $request, $response {
     $base-url = $url-scheme ~ '://' ~ $url-host ~
         ($meta-refresh ?? '/--meta-refresh/' !! '/');
 
-    $hyperlink = $base-url ~ encode-base64(gzip($return-url), :str);
+    $hyperlink = $base-url ~ hyperlink $return-url;
 
     %stash = title => 'New hyperlink created', :$hyperlink;
 
@@ -46,7 +44,7 @@ $router.post(-> $request, $response {
 # Process the hyperlink
 $router.get('/--meta-refresh/**', -> $request, $response {
     my Str $return-url   = $request.path.subst: /^ '/--meta-refresh/'/, Empty;
-    my Str $redirect-url = gunzip(decode-base64($return-url, :bin));
+    my Str $redirect-url = redirect $return-url;
     my Str %stash        = title => 'Hyperlinking...', :$redirect-url;
 
     $response.html($template.render: 'index', %stash);
@@ -54,8 +52,7 @@ $router.get('/--meta-refresh/**', -> $request, $response {
 
 $router.get('/**', -> $request, $response {
     my Str $return-url   = $request.path.substr(1); # Omits the leading slash
-
-    my Str $redirect-url = gunzip(decode-base64($return-url, :bin));
+    my Str $redirect-url = redirect $return-url;
 
     $response.redirect($redirect-url);
 });

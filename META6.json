@@ -1,12 +1,13 @@
 {
-    "name": "Hyperlink-Redirect",
-    "depends": [
-        "Humming-Bird",
-        "Template::Mustache",
-        "Base64",
-        "Libarchive::Filter"
-    ],
-    "provides": {
-        "Hyperlink-Redirect": "lib/Hyperlink-Redirect.rakumod"
-    }
+  "name": "Hyperlink-Redirect",
+  "depends": [
+    "Humming-Bird",
+    "Template::Mustache",
+    "Base64",
+    "Libarchive::Filter"
+  ],
+  "provides": {
+    "Hyperlink-Redirect": "lib/Hyperlink-Redirect.rakumod",
+    "Hyperlink-Redirect::Helpers": "lib/Hyperlink-Redirect/Helpers.rakumod"
+  }
 }
