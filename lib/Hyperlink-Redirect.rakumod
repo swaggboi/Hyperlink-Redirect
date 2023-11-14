@@ -4,6 +4,7 @@ use Humming-Bird::Advice;
 use Template::Mustache;
 use Base64;
 use Libarchive::Filter :gzip;
+use Helpers;
 
 # Normally would 'use' local libs here for Controller and Model and
 # what not but keeping it simple for now...
@@ -25,7 +26,7 @@ $router.get(-> $request, $response {
 });
 
 $router.post(-> $request, $response {
-    my Str  $return-url   = $request.content<hyperlink>;
+    my Str  $return-url   = fix-protocol($request.content<hyperlink>);
     my Bool $meta-refresh = $request.content<meta-refresh>.defined;
     my Str  $url-scheme   = $request.headers<X-Forwarded-Proto> || 'http';
     my Str  $url-host     = $request.headers<Host>;
@@ -52,7 +53,8 @@ $router.get('/--meta-refresh/**', -> $request, $response {
 
 $router.get('/**', -> $request, $response {
     my Str $return-url   = $request.path.substr(1); # Omits the leading slash
-    my Str $redirect-url = gunzip(decode-base64($return-url, :bin));
 
+    my Str $redirect-url = gunzip(decode-base64($return-url, :bin));
+    
     $response.redirect($redirect-url);
 });
