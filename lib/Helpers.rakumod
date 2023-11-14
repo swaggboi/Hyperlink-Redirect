@@ -1,7 +1,7 @@
-my $starts-with-protocol = rx:i/ ^https?\:\/\//;  
+my $starts-with-protocol = rx:i/ ^https? '://'/;  
 
 sub fix-protocol ($url)  is export {
-    return "https://" ~ $url unless $url ~~ $starts-with-protocol;
+    return "http://" ~ $url unless $url ~~ $starts-with-protocol;
 }
 
 # I use a dedicated method to remove all debugging messages prior to commit
