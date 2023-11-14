@@ -4,10 +4,11 @@ use Humming-Bird::Advice;
 use Template::Mustache;
 use Base64;
 use Libarchive::Filter :gzip;
-use Helpers;
 
 # Normally would 'use' local libs here for Controller and Model and
 # what not but keeping it simple for now...
+# UPDATE: We now have local lib (sry libs)
+use Hyperlink-Redirect::Helpers;
 
 # Set things up (config stuff would go here?)
 my $template = Template::Mustache.new: :from<../templates>;
@@ -28,8 +29,8 @@ $router.get(-> $request, $response {
 $router.post(-> $request, $response {
     my Str  $return-url   = fix-protocol($request.content<hyperlink>);
     my Bool $meta-refresh = $request.content<meta-refresh>.defined;
-    my Str  $url-scheme   = $request.headers<X-Forwarded-Proto> || 'http';
-    my Str  $url-host     = $request.headers<Host>;
+    my Str  $url-scheme   = $request.headers<x-forwarded-proto> || 'http';
+    my Any  $url-host     = $request.headers<host>;
     my (Str $base-url, Str $hyperlink, Str %stash);
 
     $base-url = $url-scheme ~ '://' ~ $url-host ~
