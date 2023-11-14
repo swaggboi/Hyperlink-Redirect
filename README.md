@@ -42,7 +42,7 @@ A "useful" tool for turning hyperlinks into redirects in the name of shortening 
 
 ## TODO
 
-1. Charset should be `utf-8` not `utf8`
+1. Charset should be `utf-8` not `utf8` (in Content-Type response header)
 1. Verify status of meta-refresh; should it be 200 or 3xx?
 1. Tests
 1. Test UTF-8 chars in return-url
