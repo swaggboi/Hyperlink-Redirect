@@ -41,6 +41,11 @@ $router.post(-> $request, $response {
     $response.html($template.render: 'index', %stash);
 });
 
+# Don't try to process favicon as a hyperlink
+$router.get('/favicon.ico', -> $request, $response {
+    $response.status(204)
+});
+
 # Process the hyperlink
 $router.get('/--meta-refresh/**', -> $request, $response {
     my Str $return-url   = $request.path.subst: /^ '/--meta-refresh/'/, Empty;
