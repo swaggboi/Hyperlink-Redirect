@@ -30,7 +30,7 @@ $router.post(-> $request, $response {
     my Str  $return-url   = fix-protocol($request.content<hyperlink>);
     my Bool $meta-refresh = $request.content<meta-refresh>.defined;
     my Str  $url-scheme   = $request.headers<x-forwarded-proto> || 'http';
-    my Any  $url-host     = $request.headers<host>;
+    my Str  $url-host     = $request.headers<host>;
     my (Str $base-url, Str $hyperlink, Str %stash);
 
     $base-url = $url-scheme ~ '://' ~ $url-host ~
@@ -56,6 +56,6 @@ $router.get('/**', -> $request, $response {
     my Str $return-url   = $request.path.substr(1); # Omits the leading slash
 
     my Str $redirect-url = gunzip(decode-base64($return-url, :bin));
-    
+
     $response.redirect($redirect-url);
 });
