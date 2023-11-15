@@ -1,0 +1,8 @@
+use v6.d;
+use Humming-Bird::Core;
+
+# Local libs
+use lib 'lib';
+use Hyperlink-Redirect;
+
+
