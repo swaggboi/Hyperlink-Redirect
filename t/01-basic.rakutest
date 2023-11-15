@@ -1,8 +1,17 @@
 use v6.d;
 use Humming-Bird::Core;
-
+use Test;
 # Local libs
 use lib 'lib';
 use Hyperlink-Redirect;
+use Hyperlink-Redirect::Helpers;
 
+plan 2;
 
+ok fix-protocol("seriousbusiness.international") eq  "http://seriousbusiness.international", \
+"fix-protocol fixes bare domains correctly"\
+or diag "\nfix-protocol should return the same string with 'http://' prefixed if protocol isn't specified";
+
+ok fix-protocol("https://www.seriousbusiness.international") eq "https://www.seriousbusiness.international",\
+"fix-protocol does not mangle correctly formatted domains"\
+or diag "\nThe URL should remain unchanged when the protocol is specified";
