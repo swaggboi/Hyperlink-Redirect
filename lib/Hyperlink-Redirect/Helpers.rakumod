@@ -3,7 +3,7 @@ use Libarchive::Filter :gzip;
 
 my $starts-with-protocol = rx:i/ ^https? '://'/;
 
-sub fix-protocol($url) is export {
+sub fix-protocol(Str $url) is export {
     return "http://" ~ $url unless $url ~~ $starts-with-protocol;
 
     return $url;
