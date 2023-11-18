@@ -11,4 +11,4 @@ use Humming-Bird::Core;
 use lib 'lib';
 use Hyperlink-Redirect;
 
-listen(3000);
+listen 3000;
