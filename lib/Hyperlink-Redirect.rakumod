@@ -1,6 +1,4 @@
 use Humming-Bird::Core;
-use Humming-Bird::Middleware;
-use Humming-Bird::Advice;
 use Template::Mustache;
 
 # Normally would 'use' local libs here for Controller and Model and
@@ -11,9 +9,8 @@ use Hyperlink-Redirect::Helpers;
 # Set things up (config stuff would go here?)
 my $template = Template::Mustache.new: :from<../templates>;
 
-# Logging
-middleware &middleware-logger;
-advice     &advice-logger;
+# Plugins
+plugin 'Logger';
 
 # Must set the root path lest yet miss setting $!root
 my $router = Router.new(root => '/');
