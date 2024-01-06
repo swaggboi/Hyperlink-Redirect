@@ -1,4 +1,4 @@
-FROM rakudo-star:2023.08
+FROM docker.io/rakudo-star:2023.08
 
 # Move it
 WORKDIR /opt
@@ -11,6 +11,10 @@ COPY templates/ ./templates/
 RUN apt-get update
 RUN apt-get -y upgrade
 RUN apt-get -y install libssl-dev libarchive-dev
+# Tests failing cope
+RUN zef -v install --force-test IO::Socket::Async::SSL  \
+                                NativeHelpers::Callback \
+                                Archive::Libarchive::Raw
 RUN zef -v install --deps-only .
 
 # Finish setting up the environment
