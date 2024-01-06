@@ -11,15 +11,10 @@ COPY templates/ ./templates/
 RUN apt-get update
 RUN apt-get -y upgrade
 RUN apt-get -y install libssl-dev libarchive-dev
-# Stupid tests failing idk
-RUN zef -v install --force-test IO::Socket::Async::SSL \
-    Archive::Libarchive::Raw NativeHelpers::Callback
-# Get the latest and greatest for bug fix
-# https://github.com/rawleyfowler/Humming-Bird/issues/60#issuecomment-1788351265
-RUN zef install https://github.com/rawleyfowler/Humming-Bird.git --force-install
 RUN zef -v install --deps-only .
 
 # Finish setting up the environment
+ENV HUMMING_BIRD_ENV='PROD'
 EXPOSE 3000
 
 CMD ["raku", "bin/hyperlink-redirect"]
