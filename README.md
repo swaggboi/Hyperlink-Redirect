@@ -21,15 +21,17 @@ A "useful" tool for turning hyperlinks into redirects in the name of shortening 
 ### Tag
 
     podman tag hyperlink-redirect \
-        git.minimally.online/swaggboi_priv/hyperlink-redirect
+        git.seriousbusiness.international/swaggboi_priv/hyperlink-redirect
 
 ### Push
 
-    podman push git.minimally.online/swaggboi_priv/hyperlink-redirect
+    podman push \
+        git.seriousbusiness.international/swaggboi_priv/hyperlink-redirect
 
 ### Pull
 
-    podman pull git.minimally.online/swaggboi_priv/hyperlink-redirect
+    podman pull \
+        git.seriousbusiness.international/swaggboi_priv/hyperlink-redirect
 
 ### Run
 
